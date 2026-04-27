@@ -1,0 +1,64 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Movimientos</h2>
+    <button (click)="nuevoRegistro()" class="btn btn-primary">+ Nuevo Movimiento</button>
+  </div>
+
+  <div *ngIf="mensaje" [class]="'mensaje mensaje-' + tipoMensaje">
+    {{ mensaje }}
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar por cuenta, tipo o valor..." [(ngModel)]="busqueda" (input)="filtrar()" class="search-input">
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Cuenta</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Saldo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mov of movimientosFiltrados">
+        <td>{{ mov.fecha | date:'short' }}</td>
+        <td>{{ getNombreCuenta(mov.cuentaId) }}</td>
+        <td>{{ mov.tipoMovimiento }}</td>
+        <td [class]="mov.valor < 0 ? 'negativo' : 'positivo'">{{ mov.valor | currency }}</td>
+        <td>${{ mov.saldo | number:'1.2-2' }}</td>
+        <td class="actions">
+          <button (click)="eliminar(mov)" class="btn btn-small btn-danger">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="mostraFormulario" class="modal-overlay" (click)="cerrar()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Nuevo Movimiento</h3>
+        <button (click)="cerrar()" class="close-btn">&times;</button>
+      </div>
+      <form class="form">
+        <select [(ngModel)]="nuevoMovimiento.cuentaId" name="cuentaId" class="input">
+          <option value="">Selecciona Cuenta</option>
+          <option *ngFor="let c of cuentas" [value]="c.cuentaId">{{ c.numeroCuenta }} - {{ c.tipoCuenta }}</option>
+        </select>
+        <select [(ngModel)]="nuevoMovimiento.tipoMovimiento" name="tipoMovimiento" class="input">
+          <option value="">Selecciona Tipo</option>
+          <option value="Depósito">Depósito</option>
+          <option value="Retiro">Retiro</option>
+        </select>
+        <input type="number" placeholder="Valor" [(ngModel)]="nuevoMovimiento.valor" name="valor" class="input">
+        <div class="form-actions">
+          <button type="button" (click)="guardar()" class="btn btn-primary">Registrar</button>
+          <button type="button" (click)="cerrar()" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

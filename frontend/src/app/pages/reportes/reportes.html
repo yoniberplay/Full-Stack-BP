@@ -1,0 +1,69 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Reportes</h2>
+  </div>
+
+  <div *ngIf="mensaje" [class]="'mensaje mensaje-' + tipoMensaje">
+    {{ mensaje }}
+  </div>
+
+  <div class="filter-section">
+    <div class="filter-group">
+      <label>Cliente:</label>
+      <select [(ngModel)]="personaId" class="input">
+        <option [value]="null">Selecciona Cliente</option>
+        <option *ngFor="let c of clientes" [value]="c.personaId">{{ c.nombre }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Fecha Inicio:</label>
+      <input type="date" [(ngModel)]="fechaInicio" class="input">
+    </div>
+    <div class="filter-group">
+      <label>Fecha Fin:</label>
+      <input type="date" [(ngModel)]="fechaFin" class="input">
+    </div>
+    <button (click)="generarReporte()" [disabled]="cargando" class="btn btn-primary">
+      {{ cargando ? 'Generando...' : 'Generar Reporte' }}
+    </button>
+  </div>
+
+  <div *ngIf="reporte" class="reporte-section">
+    <div class="reporte-header">
+      <h3>Reporte de Cuenta - {{ reporte.clienteNombre }}</h3>
+      <button (click)="descargarPDF()" class="btn btn-success">📥 Descargar PDF</button>
+    </div>
+
+    <div class="reporte-info">
+      <p><strong>Cliente:</strong> {{ reporte.clienteNombre }}</p>
+      <p><strong>Identificación:</strong> {{ reporte.identificacion }}</p>
+      <p><strong>Período:</strong> {{ reporte.fechaInicio | date:'mediumDate' }} - {{ reporte.fechaFin | date:'mediumDate' }}</p>
+      <p><strong>Total Débitos:</strong> ${{ reporte.totalDebitos | number:'1.2-2' }}</p>
+      <p><strong>Total Créditos:</strong> ${{ reporte.totalCreditos | number:'1.2-2' }}</p>
+    </div>
+
+    <div *ngFor="let cuenta of reporte.cuentas" class="cuenta-reporte">
+      <h4>Cuenta: {{ cuenta.numeroCuenta }} ({{ cuenta.tipoCuenta }})</h4>
+      <p>Saldo Actual: ${{ cuenta.saldoActual | number:'1.2-2' }}</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mov of cuenta.movimientos">
+            <td>{{ mov.fecha | date:'short' }}</td>
+            <td>{{ mov.tipo }}</td>
+            <td [class]="mov.valor < 0 ? 'negativo' : 'positivo'">{{ mov.valor | currency }}</td>
+            <td>${{ mov.saldo | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

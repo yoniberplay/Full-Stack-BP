@@ -1,0 +1,64 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Gestión de Cuentas</h2>
+    <button (click)="nuevoRegistro()" class="btn btn-primary">+ Nueva Cuenta</button>
+  </div>
+
+  <div *ngIf="mensaje" [class]="'mensaje mensaje-' + tipoMensaje">
+    {{ mensaje }}
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar por número de cuenta..." [(ngModel)]="busqueda" (input)="filtrar()" class="search-input">
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Número Cuenta</th>
+        <th>Tipo</th>
+        <th>Saldo Disponible</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cuenta of cuentasFiltradas">
+        <td>{{ cuenta.numeroCuenta }}</td>
+        <td>{{ cuenta.tipoCuenta }}</td>
+        <td>${{ cuenta.saldoDisponible | number:'1.2-2' }}</td>
+        <td><span [class]="'estado estado-' + (cuenta.estado ? 'activo' : 'inactivo')">{{ cuenta.estado ? 'Activa' : 'Inactiva' }}</span></td>
+        <td class="actions">
+          <button (click)="editar(cuenta)" class="btn btn-small btn-secondary">Editar</button>
+          <button (click)="eliminar(cuenta)" class="btn btn-small btn-danger">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="mostraFormulario" class="modal-overlay" (click)="cerrar()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>{{ cuentaEditando ? 'Editar Cuenta' : 'Nueva Cuenta' }}</h3>
+        <button (click)="cerrar()" class="close-btn">&times;</button>
+      </div>
+      <form class="form">
+        <input type="text" placeholder="Número Cuenta" [(ngModel)]="novaCuenta.numeroCuenta" name="numeroCuenta" class="input">
+        <select [(ngModel)]="novaCuenta.tipoCuenta" name="tipoCuenta" class="input">
+          <option value="">Selecciona Tipo</option>
+          <option value="Ahorros">Ahorros</option>
+          <option value="Corriente">Corriente</option>
+        </select>
+        <input type="number" placeholder="Saldo Inicial" [(ngModel)]="novaCuenta.saldoInicial" name="saldoInicial" class="input">
+        <select [(ngModel)]="novaCuenta.personaId" name="personaId" class="input">
+          <option value="">Selecciona Cliente</option>
+          <option *ngFor="let c of clientes" [value]="c.personaId">{{ c.nombre }}</option>
+        </select>
+        <div class="form-actions">
+          <button type="button" (click)="guardar()" class="btn btn-primary">Guardar</button>
+          <button type="button" (click)="cerrar()" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

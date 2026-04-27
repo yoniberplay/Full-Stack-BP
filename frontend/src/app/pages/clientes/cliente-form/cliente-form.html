@@ -1,0 +1,135 @@
+<form class="form" (ngSubmit)="guardar()">
+  <div class="form-group">
+    <label for="nombre">Nombre *</label>
+    <input
+      type="text"
+      id="nombre"
+      [(ngModel)]="formulario.nombre"
+      name="nombre"
+      class="input"
+      [class.error]="!isNombreValid && touched['nombre']"
+      placeholder="Ingresa el nombre completo"
+      required>
+    <span class="input-error" *ngIf="!isNombreValid && touched['nombre']">
+      El nombre es requerido (mínimo 3 caracteres)
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="genero">Género *</label>
+    <select
+      id="genero"
+      [(ngModel)]="formulario.genero"
+      name="genero"
+      class="input"
+      [class.error]="!formulario.genero && touched['genero']"
+      required>
+      <option value="">Selecciona género</option>
+      <option value="M">Masculino</option>
+      <option value="F">Femenino</option>
+      <option value="O">Otro</option>
+    </select>
+    <span class="input-error" *ngIf="!formulario.genero && touched['genero']">
+      El género es requerido
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="edad">Edad *</label>
+    <input
+      type="number"
+      id="edad"
+      [(ngModel)]="formulario.edad"
+      name="edad"
+      class="input"
+      [class.error]="!isEdadValid && touched['edad']"
+      placeholder="Ingresa la edad"
+      min="18"
+      max="120"
+      required>
+    <span class="input-error" *ngIf="!isEdadValid && touched['edad']">
+      La edad debe estar entre 18 y 120 años
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="identificacion">Identificación *</label>
+    <input
+      type="text"
+      id="identificacion"
+      [(ngModel)]="formulario.identificacion"
+      name="identificacion"
+      class="input"
+      [class.error]="!isIdentificacionValid && touched['identificacion']"
+      placeholder="Ingresa documento de identidad"
+      required>
+    <span class="input-error" *ngIf="!isIdentificacionValid && touched['identificacion']">
+      La identificación es requerida
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="direccion">Dirección *</label>
+    <input
+      type="text"
+      id="direccion"
+      [(ngModel)]="formulario.direccion"
+      name="direccion"
+      class="input"
+      [class.error]="!formulario.direccion && touched['direccion']"
+      placeholder="Ingresa la dirección"
+      required>
+    <span class="input-error" *ngIf="!formulario.direccion && touched['direccion']">
+      La dirección es requerida
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="telefono">Telefono *</label>
+    <input
+      type="text"
+      id="telefono"
+      [(ngModel)]="formulario.telefono"
+      name="telefono"
+      class="input"
+      [class.error]="!isTelefonoValid && touched['telefono']"
+      placeholder="Ingresa el telefono"
+      required>
+    <span class="input-error" *ngIf="!isTelefonoValid && touched['telefono']">
+      El telefono debe tener minimo 10 digitos
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="contrasena">Contrasena *</label>
+    <input
+      type="password"
+      id="contrasena"
+      [(ngModel)]="formulario.contrasena"
+      name="contrasena"
+      class="input"
+      [class.error]="!isPasswordValid && touched['contrasena']"
+      placeholder="Ingresa una contrasena segura"
+      required>
+    <span class="input-error" *ngIf="!isPasswordValid && touched['contrasena']">
+      La contrasena debe tener minimo 6 caracteres
+    </span>
+  </div>
+
+  <label class="checkbox">
+    <input
+      type="checkbox"
+      [(ngModel)]="formulario.estado"
+      name="estado">
+    <span>Activo</span>
+  </label>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" [disabled]="!isFormValid">
+      {{ cliente ? 'Actualizar' : 'Guardar' }}
+    </button>
+    <button type="button" (click)="cancelar()" class="btn btn-secondary">
+      Cancelar
+    </button>
+  </div>
+</form>

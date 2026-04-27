@@ -1,0 +1,48 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Gestión de Clientes</h2>
+    <button (click)="nuevoCliente()" class="btn btn-primary">+ Nuevo Cliente</button>
+  </div>
+
+  <div *ngIf="mensaje" [class]="'mensaje mensaje-' + tipoMensaje">
+    {{ mensaje }}
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar por nombre o identificación..." [(ngModel)]="busqueda" (input)="filtrar()" class="search-input">
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Identificación</th>
+        <th>Teléfono</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientesFiltrados">
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.identificacion }}</td>
+        <td>{{ cliente.telefono }}</td>
+        <td><span [class]="'estado estado-' + (cliente.estado ? 'activo' : 'inactivo')">{{ cliente.estado ? 'Activo' : 'Inactivo' }}</span></td>
+        <td class="actions">
+          <button (click)="editar(cliente)" class="btn btn-small btn-secondary">Editar</button>
+          <button (click)="eliminar(cliente)" class="btn btn-small btn-danger">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="mostraFormulario" class="modal-overlay" (click)="cerrarFormulario()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>{{ clienteEditando ? 'Editar Cliente' : 'Nuevo Cliente' }}</h3>
+        <button (click)="cerrarFormulario()" class="close-btn">&times;</button>
+      </div>
+      <app-cliente-form [cliente]="clienteEditando" (guardado)="clienteGuardado()" (cancelado)="cerrarFormulario()"></app-cliente-form>
+    </div>
+  </div>
+</div>
