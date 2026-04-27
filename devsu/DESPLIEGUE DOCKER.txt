@@ -1,5 +1,0 @@
-DESDE CMD
-
-docker build -t devsu-api .
-
-docker run -p 5001:5001  -e SPRING_PROFILES_ACTIVE=sqlserver   -e SPRING_DATASOURCE_URL="jdbc:sqlserver://devsuyoniber.database.windows.net:1433;databaseName=devsudb;encrypt=true;trustServerCertificate=false"   -e SPRING_DATASOURCE_USERNAME=IbankingUser  -e SPRING_DATASOURCE_PASSWORD=MaripositaPass123!  devsu-api
