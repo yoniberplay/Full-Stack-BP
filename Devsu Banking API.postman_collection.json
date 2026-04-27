@@ -1,0 +1,478 @@
+{
+	"info": {
+		"_postman_id": "b7072e5b-15b1-4f00-9078-72bd07e21bb5",
+		"name": "Devsu Banking API",
+		"description": "Colección de endpoints para la API bancaria Devsu. Requiere la variable de entorno `base_url` (ej: http://localhost:5001).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26901063"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Obtener todos los clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cliente por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar clientes por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes/buscar?nombre=Jose",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Jose"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"YONIBER ENCARNACION\",\n  \"genero\": \"M\",\n  \"edad\": 26,\n  \"identificacion\": \"40227971765\",\n  \"direccion\": \"EL GOLFO 06\",\n  \"telefono\": \"098254785\",\n  \"contrasena\": \"9519\",\n  \"estado\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/clientes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"direccion\": \"EL GOLFO 06\",\n    \"edad\": 26,\n    \"estado\": true,\n    \"genero\": \"M\",\n    \"identificacion\": \"40227971765\",\n    \"nombre\": \"YONIBER ENCARNACION\",\n    \"personaId\": 4,\n    \"telefono\": \"8299884791\",\n    \"contrasena\": \"1111111111111111111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/clientes/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuentas",
+			"item": [
+				{
+					"name": "Obtener todas las cuentas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cuentas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cuenta por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cuentas/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cuentas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cuenta por número de cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cuentas/numero/225487",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cuentas",
+								"numero",
+								"225487"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cuentas por cliente (personaId)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cuentas/cliente/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cuentas",
+								"cliente",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar cuentas por número",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cuentas/buscar?numeroCuenta=495878",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cuentas",
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "numeroCuenta",
+									"value": "495878"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear cuenta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numeroCuenta\": \"478760\",\n  \"tipoCuenta\": \"AHORROS\",\n  \"saldoInicial\": 2000.00,\n  \"estado\": true,\n  \"personaId\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cuentas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"numeroCuenta\": \"478758\",\n    \"tipoCuenta\": \"corriente\",\n    \"saldoDisponible\": 700.00,\n    \"estado\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cuentas/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cuentas",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar cuenta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cuentas/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cuentas",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movimientos",
+			"item": [
+				{
+					"name": "Obtener todos los movimientos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/movimientos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener movimiento por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/movimientos/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimientos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener movimientos por cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/movimientos/cuenta/13",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimientos",
+								"cuenta",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear movimiento - Retiro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tipoMovimiento\": \"Retiro\",\n    \"valor\": 4.0,\n    \"cuentaId\": 3\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/movimientos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear movimiento - Depósito",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoMovimiento\": \"Depósito\",\n  \"valor\": 2,\n  \"cuentaId\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/movimientos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar movimiento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/movimientos/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimientos",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
